@@ -1,8 +1,3 @@
-<?php
-session_start();
-include 'functions.inc.php';
-dbConnect();
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -47,7 +42,13 @@ dbConnect();
 					</ul><!-- /.left-top-menu -->
 
 					<ul class="right-top-menu pull-right">
-						<li><a href="login.php">Login</a></li>
+                                            <?php
+                                              if (isset($_SESSION['UserConnect'])): ?>
+                                            <li><a href="logout.php.php">Logout</a></li>
+                                            <?php  else : ?>
+                                            <li><a href="login.php">Login</a></li>
+                                            <?php endif; ?>
+						
                                                 <li><a href="register.php">Register</a></li>
 						<li><a href="#">Subscribe</a></li>
 						<li>
@@ -174,6 +175,17 @@ dbConnect();
 					</ul>
 				</div> <!-- /.ccr-language -->
 			</div><!-- /.container -->
+                        
+                            <div class="message">
+                                <?php if (!empty($_SESSION['message'])): ?>
+        <?php if (($_SESSION['MessageType']) == "information"): ?> 
+            <div class="message"><font color="green"><?php echo $_SESSION['message'] ?></font></div>
+        <?php elseif (($_SESSION['MessageType']) == "error"): ?>
+            <div class="message"><font color="red"><?php echo $_SESSION['message'] ?></font></div>
+         <?php endif; unset($_SESSION['MessageType']); ?>
+    <?php endif; unset($_SESSION['message']); ?>        
+                            </div>    
+                        
 		</nav><!-- /.second-menu -->
 	</section><!-- / #ccr-nav-below-main -->
 

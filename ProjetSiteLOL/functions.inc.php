@@ -56,5 +56,24 @@ function user_exist($Email) {
         return $userExist = 0;
     }
 }
+//--------------------------------------------------------------------------
+/*
+ * Allows connect a user checking if email and password is true
+ */
+function checkIfEmailAndPwdOk($Email, $Password) {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $sql = "SELECT UserId, Email, IsAdmin, IsModerator, FirstName, LastName FROM t_users where Email = :email AND Password = :password LIMIT 1;";
+    $req = $dbc->prepare($sql);
+    $req->execute(array(':email' => $Email,
+        ':password' => $Password));
+    $userId = $req->fetch(PDO::FETCH_ASSOC);
+    if (isset($userId)) {
+        return $userId;
+    } else {
+        return $userId = 0;
+    }
+}
 
 ?>

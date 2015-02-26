@@ -1,5 +1,9 @@
-<?php 
-include './header.php'; 
+<?php
+session_start();
+include_once './header.php';
+include_once 'functions.inc.php';
+dbConnect();
+ 
 ?>
 <section id="ccr-main-section">
 	<div class="container">

@@ -1,5 +1,7 @@
 <?php 
-include './header.php';
+session_start();
+include 'functions.inc.php';
+dbConnect();
 
 /**
  * Vérifie que les champs sont définie et les attribue à une variable
@@ -44,16 +46,21 @@ if (filter_has_var(INPUT_POST, "register")) {
             $auser["BirthDate"] = $BirthDate;
             $auser["Password"] = sha1($Password);
             addUser($auser);
-            //$_SESSION['message'] = "Congratulation, you are register on our website";
-            //header('Location: login.php');
+            header('Location: login.php');
+            $_SESSION['message'] = "Congratulation, you are register on our website";
+            $_SESSION['MessageType'] = "information";
             exit;
         }
     } else {
-        //$_SESSION['message'] = "Please filling all fields";
-        //$_SESSION['MessageType'] = "error";
+        $_SESSION['message'] = "Please filling all fields";
+        $_SESSION['MessageType'] = "error";
         echo "salut";
     }
 }
+
+include './header.php';
+
+
 ?>
 <section id="ccr-main-section">
 	<div class="container">
