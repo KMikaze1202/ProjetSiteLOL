@@ -154,12 +154,26 @@ function get_all_comments_infos($ArticleId) {
 //--------------------------------------------------------------------------    
     global $dbc;
 
-    $sql = 'SELECT * FROM t_comments, t_users, t_articles WHERE t_comments.CommentId=t_articles.ArticleId AND t_comments.UserId=t_users.UserId AND t_comments.CommentId = :ArticleId';
+    $sql = 'SELECT * FROM t_comments, t_users, t_articles WHERE t_comments.ArticleId=t_articles.ArticleId AND t_comments.UserId=t_users.UserId AND t_comments.ArticleId = :ArticleId';
     $req = $dbc->prepare($sql);
     $req->execute(array(':ArticleId' => $ArticleId));
     $comments = $req->fetchAll(PDO::FETCH_ASSOC);
     return $comments;
 }
+//--------------------------------------------------------------------------
+/*
+ * Allows add a user to the database
+ */
+function addComment($acomment) {
+//--------------------------------------------------------------------------
+    global $dbc;
 
+    $req = $dbc->prepare('INSERT INTO t_comments(Comment, CommentDate, ArticleId, UserId) VALUES (:Comment, :CommentDate, :ArticleId, :UserId);');
+    return $req->execute(array(
+                ':Comment' => $acomment['Comment'],
+                ':CommentDate' => date("Y-m-d"),
+                ':ArticleId' => $acomment['ArticleId'],
+                ':UserId' => $acomment['UserId']));
+}
 
 ?>

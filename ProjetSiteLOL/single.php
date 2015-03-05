@@ -2,11 +2,36 @@
 session_start();
 include_once 'functions.inc.php';
 dbConnect();
+
 include './header.php';
+
 $id_article = (int) $_GET['ArticleId'];
 $article = get_articles_info_by_id($id_article);
-$comments = get_all_comments_infos($id_article);
 $keywords = get_keywords_by_article_id($id_article);
+
+$content_comment = trim(filter_input(INPUT_POST, "comment"));
+
+
+if (filter_has_var(INPUT_POST, "submit")) {
+    if (!empty($content_comment)) {        
+            /**
+             * Attribue les champs au tableau à inserer dans la base de donnée
+             * et les ajoute à la base de de donnée en affichant un message de réussite
+             */
+            $acomment = array();
+            $acomment["Comment"] = $content_comment;
+            $acomment["ArticleId"] = $id_article;
+            $acomment["UserId"] = $_SESSION['idUserConnected'];
+            addComment($acomment);
+            $_SESSION['message'] = "Vous avez poster un commentaire";
+            $_SESSION['MessageType'] = "information";
+        
+    } else {
+        $_SESSION['message'] = "Remplissez tout les champs";
+        $_SESSION['MessageType'] = "error";
+    }
+}
+$comments = get_all_comments_infos($id_article);
 ?>
 <section id="ccr-main-section">
 	<div class="container">
@@ -158,7 +183,7 @@ $keywords = get_keywords_by_article_id($id_article);
 						<p>Post a Comment</p>
 				</div> <!-- .ccr-gallery-ttile -->
 				<div id="respond">
-					<form action="#" method="post" id="commentform">
+					<form enctype="multipart/form-data" method="post" id="commentform">
 					<textarea id="comment" name="comment" placeholder="Message" rows="8" required></textarea>
 					<input name="submit" type="submit" id="submit" value="Submit">
 					

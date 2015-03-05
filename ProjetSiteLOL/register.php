@@ -48,7 +48,7 @@ if (filter_has_var(INPUT_POST, "register")) {
             $auser["Password"] = sha1($Password);
             addUser($auser);
             add_picture();
-            //header('Location: login.php');
+            header('Location: login.php');
             $_SESSION['message'] = "Congratulation, you are register on our website";
             $_SESSION['MessageType'] = "information";
             exit;
