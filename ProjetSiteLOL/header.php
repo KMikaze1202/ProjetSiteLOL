@@ -1,3 +1,14 @@
+<?php
+$Keyword = trim(filter_input(INPUT_POST, "Keyword"));
+
+if (filter_has_var(INPUT_POST, "search")) {
+    if (!empty($Keyword)) {
+        $Keyword = trim(filter_input(INPUT_POST, "Keyword"));
+        header('Location: search.php?Keyword='.$Keyword);
+        exit;
+        }
+    }
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -53,9 +64,9 @@
                                 <li><a href="register.php">Register</a></li>
                                 <li><a href="#">Subscribe</a></li>
                                 <li>
-                                    <form class="form-inline" role="form" action="#">
-                                        <input type="search" placeholder="Search here..." required>
-                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                    <form enctype="multipart/form-data" method="post">
+                                        <input type="search" name="Keyword" placeholder="Search here..." required>
+                                        <button type="submit" name="search"><i class="fa fa-search"></i></button>
                                     </form>
                                 </li>
                             </ul> <!--  /.right-top-menu -->
@@ -100,36 +111,8 @@
                                 <li><a class="active" href="index.php">Home</a></li>
                                 <li class="dropdown">
                                     <a href="blog.php">Blog <i class="fa fa-caret-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Blog 1</a></li>
-                                        <li><a href="blog-2.html">Blog 2</a></li>
-                                        <li><a href="blog-3.html">Blog 3</a></li>
-                                    </ul><!-- /.sub-menu -->
                                 </li><!-- /.dropdown -->
-                                <li><a href="single.html">Single</a></li>
                                 <li><a href="contact.html">Contact</a></li>
-                                <li class="dropdown"><a href="#">Category <i class="fa fa-caret-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="category-1.html">Category 1</a></li>
-                                        <li><a href="category-2.html">Category 2</a></li>
-                                        <li><a href="#">More <i class="fa fa-caret-right"></i></a>
-                                            <ul class="sub-menu-2">
-                                                <li><a href="#">Demo Link 1</a></li>
-                                                <li><a href="#">Demo Link 2</a></li>
-
-                                                <li><a href="#">More <i class="fa fa-caret-right"></i></a>
-                                                    <ul class="sub-menu-3">
-                                                        <li><a href="#">Demo Link 1</a></li>
-                                                        <li><a href="#">Demo Link 2</a></li>
-                                                        <li><a href="#">Demo Link 3</a></li>
-                                                    </ul><!-- /.sub-menu-3 -->
-                                                </li>
-                                                <li><a href="#">Demo Link 3</a></li>
-                                            </ul><!-- /.sub-menu-2 -->
-                                        </li>
-                                    </ul><!-- /.sub-menu -->
-                                </li><!--  /.dropdown -->
-                                <li><a href="404.html">404</a></li>
                             </ul> <!-- /  .nav -->
                         </div><!-- /  .collapse .navbar-collapse  -->
 

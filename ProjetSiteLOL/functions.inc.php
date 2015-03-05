@@ -176,4 +176,23 @@ function addComment($acomment) {
                 ':UserId' => $acomment['UserId']));
 }
 
+//--------------------------------------------------------------------------
+/*
+ * Recorvers all reviews informations by his item
+ */
+function get_all_articles_infos_by_tag($tag) {
+//--------------------------------------------------------------------------    
+    global $dbc;
+
+    $sql = "SELECT t_articles.*, t_users.*, t_keywords.* FROM t_articles, t_users, t_keywords, t_keywords_of_articles WHERE t_articles.ArticleId = t_keywords_of_articles.ArticleId AND t_keywords_of_articles.KeywordId = t_keywords.KeywordId AND t_users.UserId = t_articles.AuthorId AND t_keywords.Keyword = :keyword";
+    $req = $dbc->prepare($sql);
+    $req->execute(array(':keyword' => $tag));
+    $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($articles)) {
+        return $articles;
+    }  else {
+        return $articles = 0;
+    }
+}
+
 ?>
