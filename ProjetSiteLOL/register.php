@@ -19,7 +19,7 @@ $errorPwdConf = "";
 $errorEmail = "";
 
 if (filter_has_var(INPUT_POST, "register")) {
-    if (!empty($FirstName) && !empty($LastName) && !empty($Email)
+    if (!empty($FirstName) && !empty($LastName) && !empty($Email) && !empty($_FILES["Avatar"]["name"])
             && !empty($BirthDate) && !empty($Password) && !empty($PasswordConf)) {
         
         if (strlen($Password) < 8) {
@@ -43,10 +43,12 @@ if (filter_has_var(INPUT_POST, "register")) {
             $auser["FirstName"] = $FirstName;
             $auser["LastName"] = $LastName;
             $auser["Email"] = $Email;
+            $auser['Avatar'] = 'img/'.$_FILES["Avatar"]["name"];
             $auser["BirthDate"] = $BirthDate;
             $auser["Password"] = sha1($Password);
             addUser($auser);
-            header('Location: login.php');
+            add_picture();
+            //header('Location: login.php');
             $_SESSION['message'] = "Congratulation, you are register on our website";
             $_SESSION['MessageType'] = "information";
             exit;
@@ -54,7 +56,6 @@ if (filter_has_var(INPUT_POST, "register")) {
     } else {
         $_SESSION['message'] = "Please filling all fields";
         $_SESSION['MessageType'] = "error";
-        echo "salut";
     }
 }
 
@@ -65,7 +66,7 @@ include './header.php';
 <section id="ccr-main-section">
 	<div class="container">
           <form enctype="multipart/form-data" method="post">
-          <h2>Inscription</h2>          
+          <h2>Inscription</h2> 
             <table class="form">
               <tbody>
                 <tr>
@@ -80,6 +81,10 @@ include './header.php';
                   <td>Email:</td>
                   <td><input name="Email" type="email" placeholder="Email" value="" required></td>
                   <td><?php echo $errorEmail ?></td>
+                </tr>
+                <tr>
+                  <td>Avatar:</td>
+                  <td><input name="Avatar" type="file" placeholder="Avatar" value="" required></td>
                 </tr>
                 <tr>
                   <td>Date de naissance:</td>
