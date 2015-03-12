@@ -84,12 +84,13 @@ function get_all_articles_info() {
 //--------------------------------------------------------------------------
     global $dbc;
 
-    $sql = "SELECT t_articles.*, t_users.* FROM t_articles, t_users WHERE t_articles.ValidatorId = t_users.UserId";
+    $sql = "SELECT t_articles.*, t_users.* FROM t_articles, t_users WHERE t_articles.ValidatorId = t_users.UserId AND t_articles.State = 2";
     $req = $dbc->prepare($sql);
     $req->execute();
     $articles = $req->fetchAll(PDO::FETCH_ASSOC);
     return $articles;
 }
+
 //--------------------------------------------------------------------------
 /*
  * Recorvers moto informations by his id
@@ -193,6 +194,17 @@ function get_all_articles_infos_by_tag($tag) {
     }  else {
         return $articles = 0;
     }
+}
+
+function get_all_keywords() {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $sql = "SELECT * FROM t_keywords";
+    $req = $dbc->prepare($sql);
+    $req->execute();
+    $keywords = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $keywords;
 }
 
 ?>

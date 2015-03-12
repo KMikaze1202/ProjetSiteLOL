@@ -16,7 +16,7 @@ if (filter_has_var(INPUT_POST, "search")) {
         <meta name="description" content="" >
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Homepage - Daily News </title>
+        <title>Acceuil - Nouveauté De League </title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -49,23 +49,25 @@ if (filter_has_var(INPUT_POST, "search")) {
                     <div class="container">
                         <nav class="top-menu">
                             <ul class="left-top-menu">
-                                <li><a href="index.php">Home</a></li>
-                                <li><a href="#">Site Map</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="index.php">Accueil</a></li>
+                                <li><a href="contact.html">Nous Contacter</a></li>
                             </ul><!-- /.left-top-menu -->
 
                             <ul class="right-top-menu pull-right">
                                 <?php if (isset($_SESSION['UserConnect'])): ?>
-                                    <li><a href="logout.php.php">Logout</a></li>
+                                    <li><a>Bonjour, <?php echo $_SESSION['UserFirstName'] . ' ' . $_SESSION['UserLastName']; ?></a></li>
+                                    <li><a href="logout.php">Déconnexion</a></li>
+                                    <li><a href="add_post">Ajouter un Article</a></li>
                                 <?php else : ?>
-                                    <li><a href="login.php">Login</a></li>
+                                    <li><a href="login.php">Connexion</a></li>
+                                    <li><a href="register.php">Inscription</a></li>
                                 <?php endif; ?>
 
-                                <li><a href="register.php">Register</a></li>
-                                <li><a href="#">Subscribe</a></li>
+                                
+                                
                                 <li>
                                     <form enctype="multipart/form-data" method="post">
-                                        <input type="search" name="Keyword" placeholder="Search here..." required>
+                                        <input type="search" name="Keyword" placeholder="Recherche..." required>
                                         <button type="submit" name="search"><i class="fa fa-search"></i></button>
                                     </form>
                                 </li>
@@ -82,13 +84,13 @@ if (filter_has_var(INPUT_POST, "search")) {
                     <div class="site-logo">
                         <a href="index.php" class="navbar-brand">
                             <img src="img/logo.png" alt="Side Logo" />
-                            <h1>Daily <span>News</span></h1>
-                            <h3>The Daily News Source</h3>
+                            <h1>LOL <span>News</span></h1>
+                            <h3>Les Nouveautés De LOL</h3>
                         </a>
                     </div> <!-- / .navbar-header -->
 
                     <div class="add-space">
-                        728 x 90 px Banner
+                        <img src="img/banner.png" alt="Banner" />
                     </div> <!-- / .adspace -->
 
                 </div>	<!-- /.container -->
@@ -108,18 +110,30 @@ if (filter_has_var(INPUT_POST, "search")) {
 
                         <div class="collapse navbar-collapse ccr-nav-main">
                             <ul class="nav navbar-nav">
-                                <li><a class="active" href="index.php">Home</a></li>
-                                <li class="dropdown">
-                                    <a href="blog.php">Blog <i class="fa fa-caret-down"></i></a>
-                                </li><!-- /.dropdown -->
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.php">Articles</a></li>
+                                <?php if (isset($_SESSION['UserConnect'])): ?>                                    
+                                    <li><a href="add_post">Ajouter un Article</a></li>
+                                <?php endif; ?>
                             </ul> <!-- /  .nav -->
                         </div><!-- /  .collapse .navbar-collapse  -->
 
                         <div id="currentTime" class="pull-right current-time">
-                            <i class="fa fa-clock-o"></i> 12:10 pm
-
-
+                            <i class="fa fa-clock-o"></i>
+                            <script type="text/javascript">
+                                var currentTime = new Date()
+                                var hours = currentTime.getHours()
+                                var secondes = currentTime.getSeconds()
+                                var minutes = currentTime.getMinutes()
+                                if (minutes < 10){
+                                    minutes = "0" + minutes
+                                }
+                                document.write(hours + ":" + minutes + ":" + secondes + " ")
+                                if(hours > 11){
+                                document.write("PM")
+                                } else {
+                                document.write("AM")
+                                }                                
+                            </script>                            
                         </div><!-- / #currentTime -->
 
                     </div>	<!-- /.container -->

@@ -42,7 +42,7 @@ include './header.php';
                   <td><input type="email" value="" name="email"></td>
                 </tr>
                 <tr>
-                  <td>Password:</td>
+                  <td>Mot de passe:</td>
                   <td><input type="password" value="" name="password"></td>
                 </tr>                
               </tbody>

@@ -3,12 +3,12 @@
 
 		<ul>
 			<li class="col-md-3">
-				<h5>About Us</h5>
+				<h5>A Propos</h5>
 				<div class="about-us">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, quod, nostrum, corrupti, maxime quis doloribus debitis id consectetur laudantium iure aperiam soluta consequuntur modi accusamus molestias. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, quod, nostrum, corrupti, maxime quis doloribus debitis id consectetur laudantium iure aperiam soluta consequuntur modi accusamus molestias Ab veniam atque eius...
+					A propos de nous
 				</div>
 				<div class="site-logo">
-					<a href="index.html"><img src="img/logo.png" alt="Side Logo" /><h1>Daily <span>News</span></h1><h3>The Daily News Source</h3></a>
+					<a href="index.php"><img src="img/logo.png" alt="Side Logo" /><h1>LOL <span>News</span></h1><h3>Les Nouveauté de LOL</h3></a>
 				</div> <!-- / .navbar-header -->
 				
 			</li>
@@ -59,22 +59,12 @@
 			<li class="col-md-3">
 				<h5>Tags</h5>
 				<div class="tagcloud">
-					<a href="#">Football</a>
-					<a href="#">Games</a>
-					<a href="#">World News</a>
-					<a href="#">USA</a>
-					<a href="#">Salman</a>
-					<a href="#">Masrafi</a>
-					<a href="#">Afgan</a>
-					<a href="#">Obama</a>
-					<a href="#">t20</a>
-					<a href="#">Business</a>
-					<a href="#">Education</a>
-					<a href="#">Lorem</a>
-					<a href="#">Dhaka</a>
-					<a href="#">BBC</a>
-					<a href="#">Poland</a>
-					<a href="#">Technology</a>
+                                    <?php
+                                    $keywords = get_all_keywords();
+                                    foreach ($keywords as $keyword) {
+                                        ?>
+                                        <a href="search.php?Keyword=<?php echo $keyword['Keyword']; ?>"><?php echo $keyword['Keyword']; ?></a>
+                                    <?php } ?>
 				</div>
 				
 			</li>
