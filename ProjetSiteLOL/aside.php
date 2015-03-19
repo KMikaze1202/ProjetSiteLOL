@@ -56,7 +56,7 @@
 			</section> <!-- /#sidebar-popular-post -->
 			<section id="sidebar-older-post">
                         <?php
-                           $OlderArticles = get_all_articles_info();
+                           $OlderArticles = get_older_5_articles_info();
                         ?>
 				<div class="ccr-gallery-ttile">
 					<span></span> 
@@ -71,7 +71,7 @@
 						<a href=single.php?ArticleId=<?php echo $OlderArticle['ArticleId'] ?>"><?php echo $OlderArticle['Title']; ?></a>
 						<div class="date-like-comment">
 							<span class="date"><time datetime="2014-02-17"><?php echo $OlderArticle['PublicationDate'] ?></time></span>
-							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
+							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i><?php echo $OlderArticle['Likes'] ?></a>
                                                         <a class="comments" href="single.php?ArticleId=<?php echo $OlderArticle['ArticleId'] ?>#comments"><i class="fa fa-comments-o"></i><?php echo count_comments_by_article_id($OlderArticle['ArticleId']) ?></a>
 						</div>
 					</li>

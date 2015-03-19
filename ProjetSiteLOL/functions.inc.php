@@ -98,7 +98,21 @@ function get_older_5_articles_info() {
 //--------------------------------------------------------------------------
     global $dbc;
 
-    $sql = "SELECT * FROM t_articles WHERE State = 2 ORDER BY PublicationDate DESC";
+    $sql = "SELECT * FROM t_articles WHERE State = 2 ORDER BY PublicationDate DESC LIMIT 5";
+    $req = $dbc->prepare($sql);
+    $req->execute();
+    $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $articles;
+}
+//--------------------------------------------------------------------------
+/*
+ * Recorvers all accessories informations
+ */
+function get_latest_6_articles_info() {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $sql = "SELECT * FROM t_articles WHERE State = 2 ORDER BY PublicationDate LIMIT 6";
     $req = $dbc->prepare($sql);
     $req->execute();
     $articles = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -231,6 +245,8 @@ function count_comments_by_article_id($ArticleId) {
     $NbComments = $req->fetch();
     return $NbComments[0];
 }
+
+
 
 
 ?>

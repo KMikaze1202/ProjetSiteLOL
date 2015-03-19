@@ -96,6 +96,9 @@ a:hover{
 	text-decoration: none;
 	color: #2cb2bc;
 }
+p.description{
+    word-break: break-all;
+}
 .container {
 	max-width: 1170px;
 	padding:0px;

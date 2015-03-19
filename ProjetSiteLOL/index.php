@@ -83,6 +83,9 @@ dbConnect();
 
 
 			<section id="ccr-latest-post-gallery">
+                        <?php
+                           $LatestArticles = get_latest_6_articles_info();
+                        ?>
 					<div class="ccr-gallery-ttile">
 						<span></span> 
 						<p>Others Latest Post Gallery</p>
@@ -90,48 +93,17 @@ dbConnect();
 
 					
 						<ul class="ccr-latest-post">
+                                                <?php
+                                                    foreach ($LatestArticles as $LatestArticle) {
+                                                ?>
 							<li>
 								<div class="ccr-thumbnail">
-									<img src="img/thumbnail1.jpg" alt="Thumbnail 1">
-									<p><a href="#postlink">Read More</a></p>
+									<img src="<?php echo $LatestArticle['Image'] ?>" alt="Thumbnail 1">
+									<p><a href=single.php?ArticleId=<?php echo $LatestArticle['ArticleId'] ?>>Read More</a></p>
 								</div>
-								<h4><a href="#postlink">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>
+								<h4><a href=single.php?ArticleId=<?php echo $LatestArticle['ArticleId'] ?>><?php echo $LatestArticle['Abstract'] ?></a></h4>
 							</li>
-							<li>
-								<div class="ccr-thumbnail">
-									<img src="img/thumbnail2.jpg" alt="Thumbnail 1">
-									<p><a href="#postlink">Read More</a></p>
-								</div>
-								<h4><a href="#postlink">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							</li>
-							<li>
-								<div class="ccr-thumbnail">
-									<img src="img/thumbnail3.jpg" alt="Thumbnail 1">
-									<p><a href="#postlink">Read More</a></p>
-								</div>
-								<h4><a href="#postlink">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							</li>
-							<li>
-								<div class="ccr-thumbnail">
-									<img src="img/thumbnail4.jpg" alt="Thumbnail 1">
-									<p><a href="#postlink">Read More</a></p>
-								</div>
-								<h4><a href="#postlink">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							</li>
-							<li>
-								<div class="ccr-thumbnail">
-									<img src="img/thumbnail5.jpg" alt="Thumbnail 1">
-									<p><a href="#postlink">Read More</a></p>
-								</div>
-								<h4><a href="#postlink">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							</li>
-							<li>
-								<div class="ccr-thumbnail">
-									<img src="img/thumbnail6.jpg" alt="Thumbnail 1">
-									<p><a href="#postlink">Read More</a></p>
-								</div>
-								<h4><a href="#postlink">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h4>
-							</li>
+                                                    <?php } ?>
 						</ul> <!-- /.ccr-latest-post -->
 					
 				</section> <!--  /#ccr-latest-post-gallery  -->

@@ -49,14 +49,14 @@ $comments = get_all_comments_infos($id_article);
 				<div class="article-like-comment-date">	
 					Posted by <a href="#author"><?php echo $article['FirstName'] ?></a> on <time datetime="<?php echo $article['PublicationDate'] ?>"><?php echo $article['PublicationDate'] ?></time>
 
-					<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
-					<a class="comments" href="#"><i class="fa fa-comments-o"></i> 49</a>
+					<a class="like"><i class="fa fa-thumbs-o-up"><?php echo $article['Likes'] ?></i></a>
+					<a class="comments" href="single.php?ArticleId=<?php echo $article['ArticleId'] ?>#comments"><i class="fa fa-comments-o"></i><?php echo count_comments_by_article_id($id_article) ?></a>
 										
 				</div> <!-- /.article-like-comment-date -->
                                 <img height="770" width="436" src="<?php echo $article['Image'] ?>" alt="1st Image">
-                                <p>
+                                <p class="description">
 					<?php echo $article['Descriptive'] ?>
-				</p>                                
+				</p>
 				<div class="article-tags">
                                     Tag:
                                 <?php foreach ($keywords as $keyword){ ?>

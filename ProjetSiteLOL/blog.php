@@ -34,7 +34,7 @@ include './header.php';
 
 
                             <div class="meta-data">			
-                                <a href="#" class="like"><i class="fa fa-thumbs-o-up"></i> 08</a>
+                                <a href="#" class="like"><i class="fa fa-thumbs-o-up"></i><?php echo $article['Likes'] ?></a>
                                 <a class="comments" href="single.php?ArticleId=<?php echo $article['ArticleId'] ?>#comments"><i class="fa fa-comments-o"></i><?php echo count_comments_by_article_id($article['ArticleId']) ?></a>			
                                 <span class="read-more"><a href="single.php?ArticleId=<?php echo $article['ArticleId'] ?>">Read More</a></span>
                             </div>
@@ -44,33 +44,8 @@ include './header.php';
                 <?php } ?>
 
                 <div class="clearfix"></div>
-                <nav class="nav-paging">
-                    <ul>
-                        <li><a href="#pre"><i class="fa fa-chevron-left"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><span class="current">3</span></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#next"><i class="fa fa-chevron-right"></i></a></li>
-                    </ul>
-                </nav>
-
-
-
             </section> <!-- /#ccr-blog -->
-
-
-
-
-
-
-
-
         </section><!-- /.col-md-8 / #ccr-left-section -->
-
-
-
         <?php include './aside.php'; ?>
 
 

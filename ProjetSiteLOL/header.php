@@ -58,7 +58,7 @@ if (filter_has_var(INPUT_POST, "search")) {
                                 <?php if (isset($_SESSION['UserConnect'])): ?>
                                     <li><a>Bonjour, <?php echo $_SESSION['UserFirstName'] . ' ' . $_SESSION['UserLastName']; ?></a></li>
                                     <li><a href="logout.php">Déconnexion</a></li>
-                                    <li><a href="add_post">Ajouter un Article</a></li>
+                                    <li><a href="add_post.php">Ajouter un Article</a></li>
                                 <?php else : ?>
                                     <li><a href="login.php">Connexion</a></li>
                                     <li><a href="register.php">Inscription</a></li>
@@ -112,9 +112,16 @@ if (filter_has_var(INPUT_POST, "search")) {
                         <div class="collapse navbar-collapse ccr-nav-main">
                             <ul class="nav navbar-nav">
                                 <li><a href="blog.php">Articles</a></li>
-                                <?php if (isset($_SESSION['UserConnect'])): ?>                                    
-                                    <li><a href="add_post">Ajouter un Article</a></li>
-                                <?php endif; ?>
+                                <?php if (isset($_SESSION['UserConnect'])){ ?>                                    
+                                    <li><a href="add_post.php">Ajouter un Article</a></li>
+                                    <?php if (($_SESSION['IsAdmin'] == 1) && ($_SESSION['IsModerator'] == 1)){ ?>
+                                        <li><a href="users_modo">Gestion Utilisateurs</a></li>
+                                        <li><a href="validate_articles.php">Validation Articles</a></li>
+                                        <?php if (($_SESSION['IsAdmin'] == 1)){ ?>
+                                        <li><a href="users_admin">Gestion Moderateurs</a></li>
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php } ?>
                             </ul> <!-- /  .nav -->
                         </div><!-- /  .collapse .navbar-collapse  -->
 
