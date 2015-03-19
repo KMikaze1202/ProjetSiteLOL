@@ -147,7 +147,7 @@ $comments = get_all_comments_infos($id_article);
 
 			<section id="ccr-commnet">
                             
-				<div class="ccr-gallery-ttile">
+				<div class="ccr-gallery-ttile" id="comments">
 						<span class="bottom"></span>
 						<p>Comment</p>
 				</div> <!-- .ccr-gallery-ttile -->

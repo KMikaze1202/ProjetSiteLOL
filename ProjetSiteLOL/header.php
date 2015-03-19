@@ -21,6 +21,7 @@ if (filter_has_var(INPUT_POST, "search")) {
         <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="js/Heure.js"></script>
         <!--[if lt IE 9]>
                 <script src="js/html5shiv.js"></script>
         <![endif]-->
@@ -118,22 +119,8 @@ if (filter_has_var(INPUT_POST, "search")) {
                         </div><!-- /  .collapse .navbar-collapse  -->
 
                         <div id="currentTime" class="pull-right current-time">
-                            <i class="fa fa-clock-o"></i>
-                            <script type="text/javascript">
-                                var currentTime = new Date()
-                                var hours = currentTime.getHours()
-                                var secondes = currentTime.getSeconds()
-                                var minutes = currentTime.getMinutes()
-                                if (minutes < 10){
-                                    minutes = "0" + minutes
-                                }
-                                document.write(hours + ":" + minutes + ":" + secondes + " ")
-                                if(hours > 11){
-                                document.write("PM")
-                                } else {
-                                document.write("AM")
-                                }                                
-                            </script>                            
+                            <i class="fa fa-clock-o"> 
+                            <b id="ejs_heure"></b></i>                          
                         </div><!-- / #currentTime -->
 
                     </div>	<!-- /.container -->

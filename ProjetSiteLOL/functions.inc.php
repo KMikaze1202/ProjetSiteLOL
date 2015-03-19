@@ -84,7 +84,21 @@ function get_all_articles_info() {
 //--------------------------------------------------------------------------
     global $dbc;
 
-    $sql = "SELECT t_articles.*, t_users.* FROM t_articles, t_users WHERE t_articles.ValidatorId = t_users.UserId AND t_articles.State = 2";
+    $sql = "SELECT * FROM t_articles WHERE t_articles.State = 2";
+    $req = $dbc->prepare($sql);
+    $req->execute();
+    $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $articles;
+}
+//--------------------------------------------------------------------------
+/*
+ * Recorvers all accessories informations
+ */
+function get_older_5_articles_info() {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $sql = "SELECT * FROM t_articles WHERE State = 2 ORDER BY PublicationDate DESC";
     $req = $dbc->prepare($sql);
     $req->execute();
     $articles = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -185,7 +199,7 @@ function get_all_articles_infos_by_tag($tag) {
 //--------------------------------------------------------------------------    
     global $dbc;
 
-    $sql = "SELECT t_articles.*, t_users.*, t_keywords.* FROM t_articles, t_users, t_keywords, t_keywords_of_articles WHERE t_articles.ArticleId = t_keywords_of_articles.ArticleId AND t_keywords_of_articles.KeywordId = t_keywords.KeywordId AND t_users.UserId = t_articles.AuthorId AND t_keywords.Keyword = :keyword";
+    $sql = "SELECT t_articles.*, t_users.*, t_keywords.* FROM t_articles, t_users, t_keywords, t_keywords_of_articles WHERE t_articles.ArticleId = t_keywords_of_articles.ArticleId AND t_keywords_of_articles.KeywordId = t_keywords.KeywordId AND t_users.UserId = t_articles.AuthorId AND t_keywords.Keyword = :keyword AND t_articles.State = 2";
     $req = $dbc->prepare($sql);
     $req->execute(array(':keyword' => $tag));
     $articles = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -200,11 +214,23 @@ function get_all_keywords() {
 //--------------------------------------------------------------------------
     global $dbc;
 
-    $sql = "SELECT * FROM t_keywords";
+    $sql = "SELECT t_keywords.Keyword FROM t_keywords, t_articles, t_keywords_of_articles WHERE t_articles.ArticleId = t_keywords_of_articles.ArticleId AND t_keywords.KeywordId = t_keywords_of_articles.KeywordId AND t_articles.State = 2";
     $req = $dbc->prepare($sql);
     $req->execute();
     $keywords = $req->fetchAll(PDO::FETCH_ASSOC);
     return $keywords;
 }
+
+function count_comments_by_article_id($ArticleId) {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $sql = "SELECT COUNT(t_comments.Comment) as Cpt FROM t_comments, t_articles WHERE t_comments.ArticleId = t_articles.ArticleId AND t_articles.ArticleId = :ArticleId";
+    $req = $dbc->prepare($sql);
+    $req->execute(array(':ArticleId' => $ArticleId));
+    $NbComments = $req->fetch();
+    return $NbComments[0];
+}
+
 
 ?>
