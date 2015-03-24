@@ -58,10 +58,9 @@ $comments = get_all_comments_infos($id_article);
 					<?php echo $article['Descriptive'] ?>
 				</p>
 				<div class="article-tags">
-                                    Tag:
+                                    Tags:
                                 <?php foreach ($keywords as $keyword){ ?>
-                                    
-					 <a href="#tag1"><?php echo $keyword[0]; ?></a>
+                                         <a href="search.php?Keyword=<?php echo $keyword['Keyword']; ?>"><?php echo $keyword['Keyword']; ?></a>
                                     <?php } ?>
 				</div>
 

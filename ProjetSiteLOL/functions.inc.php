@@ -38,6 +38,26 @@ function addUser($auser) {
                 ':Password' => $auser['Password'],
                 ':JoinDate' => date("Y-m-d")));
 }
+//--------------------------------------------------------------------------
+/*
+ * Allows add a user to the database
+ */
+function addArticle($aarticle) {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $req = $dbc->prepare('INSERT INTO t_users(FirstName, LastName, Email, Avatar, IsAdmin, IsModerator, BirthDate, Password, JoinDate) VALUES (:FirstName, :LastName, :Email, :Avatar, :IsAdmin, :IsModerator, :BirthDate, :Password, :JoinDate);');
+    return $req->execute(array(
+                ':FirstName' => $auser['FirstName'],
+                ':LastName' => $auser['LastName'],
+                ':Email' => $auser['Email'],
+                ':Avatar' => $auser['Avatar'],
+                ':IsAdmin' => 0,
+                ':IsModerator' => 0,
+                ':BirthDate' => $auser['BirthDate'],
+                ':Password' => $auser['Password'],
+                ':JoinDate' => date("Y-m-d")));
+}
 
 //--------------------------------------------------------------------------
 /*
@@ -85,6 +105,20 @@ function get_all_articles_info() {
     global $dbc;
 
     $sql = "SELECT * FROM t_articles WHERE t_articles.State = 2";
+    $req = $dbc->prepare($sql);
+    $req->execute();
+    $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $articles;
+}
+//--------------------------------------------------------------------------
+/*
+ * Recorvers all accessories informations
+ */
+function get_popular_5_articles_info() {
+//--------------------------------------------------------------------------
+    global $dbc;
+
+    $sql = "SELECT * FROM t_articles WHERE t_articles.State = 2 ORDER BY Likes DESC LIMIT 5";
     $req = $dbc->prepare($sql);
     $req->execute();
     $articles = $req->fetchAll(PDO::FETCH_ASSOC);

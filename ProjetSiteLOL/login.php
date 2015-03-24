@@ -17,16 +17,13 @@ if (filter_has_var(INPUT_POST, "login")) {
             $_SESSION['IsAdmin'] = $userId['IsAdmin'];
             $_SESSION['IsModerator'] = $userId['IsModerator'];            
             header('Location: index.php');
-            $_SESSION['message'] = "Connecter";
-            $_SESSION['MessageType'] = "information";
+            $_SESSION['message'] = "<div class='alert alert-success' role='alert'>Connecté</div>";
             exit();
         } else {
-            $_SESSION['message'] = "Wrong login or password";
-            $_SESSION['MessageType'] = "error";
+            $_SESSION['message'] = "<div class='alert alert-danger' role='alert'>Login ou password erroné</div>";
         }
     } else {
-        $_SESSION['message'] = "You need filling your email and password";
-        $_SESSION['MessageType'] = "error";
+        $_SESSION['message'] = "<div class='alert alert-warning' role='alert'>Vous devez remplire l'email et le mot de passe</div>";
     }
 }
 include './header.php';
@@ -39,7 +36,7 @@ include './header.php';
               <tbody>
                 <tr>
                   <td>E-Mail:</td>
-                  <td><input type="email" value="" name="email"></td>
+                  <td><input type="email" value="<?php echo $Email ?>" name="email"></td>
                 </tr>
                 <tr>
                   <td>Mot de passe:</td>

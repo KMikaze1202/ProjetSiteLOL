@@ -23,13 +23,18 @@ if (filter_has_var(INPUT_POST, "register")) {
             && !empty($BirthDate) && !empty($Password) && !empty($PasswordConf)) {
         
         if (strlen($Password) < 8) {
-                $errorPwd = "Choose a password longer then 7 character";
+                $errorPwd = "<div class='alert alert-warning' role='alert'>Votre mot de passe doit contenir plus de 7 caractères</div>";
         }
         else if ($Password != $PasswordConf) {
-                    $errorPwdConf = "Passwords are not identical";
+                    $errorPwdConf = "<div class='alert alert-warning' role='alert'>Les mots de passe ne sont pas identiques</div>";
                 }
         else if (trim(!filter_input(INPUT_POST, "Email", FILTER_VALIDATE_EMAIL))) {
-                    $errorEmail = "Email is not valid";
+                    $errorEmail = 
+                            "<div class='alert alert-danger' role='alert'>
+                            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                            <span class='sr-only'>Error:</span>
+                            Entrer un email valide
+                            </div>";
                 }        
         else if ($userExist != 0){
                     $errorEmail = "Email is already use";
@@ -71,15 +76,15 @@ include './header.php';
               <tbody>
                 <tr>
                   <td>Prénom:</td>
-                  <td><input name="FirstName" type="text" placeholder="Prénom" value="" required></td>
+                  <td><input name="FirstName" type="text" placeholder="Prénom" value="<?php echo $FirstName ?>" required></td>
                 </tr>
                 <tr>
                   <td>Nom:</td>
-                  <td><input name="LastName" type="text" placeholder="Nom" value="" required></td>
+                  <td><input name="LastName" type="text" placeholder="Nom" value="<?php echo $LastName ?>" required></td>
                 </tr>
                 <tr>
                   <td>Email:</td>
-                  <td><input name="Email" type="email" placeholder="Email" value="" required></td>
+                  <td><input name="Email" type="email" placeholder="Email" value="<?php echo $Email ?>" required></td>
                   <td><?php echo $errorEmail ?></td>
                 </tr>
                 <tr>
@@ -88,7 +93,7 @@ include './header.php';
                 </tr>
                 <tr>
                   <td>Date de naissance:</td>
-                  <td><input name="BirthDate" type="date" value="" required></td>
+                  <td><input name="BirthDate" type="date" value="<?php echo $BirthDate ?>" required></td>
                 </tr>
                 <tr>
                   <td>Mot de passe:</td>

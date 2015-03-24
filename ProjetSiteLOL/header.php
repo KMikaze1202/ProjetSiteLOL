@@ -114,11 +114,11 @@ if (filter_has_var(INPUT_POST, "search")) {
                                 <li><a href="blog.php">Articles</a></li>
                                 <?php if (isset($_SESSION['UserConnect'])){ ?>                                    
                                     <li><a href="add_post.php">Ajouter un Article</a></li>
-                                    <?php if (($_SESSION['IsAdmin'] == 1) && ($_SESSION['IsModerator'] == 1)){ ?>
-                                        <li><a href="users_modo">Gestion Utilisateurs</a></li>
+                                    <?php if (($_SESSION['IsAdmin'] == 1) || ($_SESSION['IsModerator'] == 1)){ ?>
+                                        <li><a href="users_modo.php">Gestion Utilisateurs</a></li>
                                         <li><a href="validate_articles.php">Validation Articles</a></li>
                                         <?php if (($_SESSION['IsAdmin'] == 1)){ ?>
-                                        <li><a href="users_admin">Gestion Moderateurs</a></li>
+                                        <li><a href="users_admin.php">Gestion Moderateurs</a></li>
                                         <?php } ?>
                                     <?php } ?>
                                 <?php } ?>
@@ -137,13 +137,7 @@ if (filter_has_var(INPUT_POST, "search")) {
                 <nav class="second-menu">                        
                     <div class="message">
                         <?php if (!empty($_SESSION['message'])): ?>
-                            <?php if (($_SESSION['MessageType']) == "information"): ?> 
-                                <div class="message"><font color="green"><?php echo $_SESSION['message'] ?></font></div>
-                            <?php elseif (($_SESSION['MessageType']) == "error"): ?>
-                                <div class="message"><font color="red"><?php echo $_SESSION['message'] ?></font></div>
-                                <?php endif;
-                                unset($_SESSION['MessageType']);
-                                ?>
+                                <div class="message"><?php echo $_SESSION['message'] ?></div>
                             <?php endif;
                             unset($_SESSION['message']);
                             ?>        

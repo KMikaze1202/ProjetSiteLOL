@@ -7,45 +7,27 @@ dbConnect();
  * Vérifie que les champs sont définie et les attribue à une variable
  */
 
-$FirstName = trim(filter_input(INPUT_POST, "FirstName"));
-$LastName = trim(filter_input(INPUT_POST, "LastName"));
-$Email = trim(filter_input(INPUT_POST, "Email"));
-$BirthDate = trim(filter_input(INPUT_POST, "BirthDate"));
-$Password = trim(filter_input(INPUT_POST, "Password"));
-$PasswordConf = trim(filter_input(INPUT_POST, "PasswordConf"));
-$userExist = user_exist($Email);
-$errorPwd = "";
-$errorPwdConf = "";
-$errorEmail = "";
+$Titre = trim(filter_input(INPUT_POST, "Tite"));
+$Vignette = trim(filter_input(INPUT_POST, "Vignette"));
+$Abstract = trim(filter_input(INPUT_POST, "Abstract"));
+$Description = trim(filter_input(INPUT_POST, "Description"));
+$Tags = trim(filter_input(INPUT_POST, "Tags"));
 
-if (filter_has_var(INPUT_POST, "register")) {
-    if (!empty($FirstName) && !empty($LastName) && !empty($Email) && !empty($_FILES["Avatar"]["name"])
-            && !empty($BirthDate) && !empty($Password) && !empty($PasswordConf)) {
-        
-        if (strlen($Password) < 8) {
-                $errorPwd = "Choose a password longer then 7 character";
-        }
-        else if ($Password != $PasswordConf) {
-                    $errorPwdConf = "Passwords are not identical";
-                }
-        else if (trim(!filter_input(INPUT_POST, "Email", FILTER_VALIDATE_EMAIL))) {
-                    $errorEmail = "Email is not valid";
-                }        
-        else if ($userExist != 0){
-                    $errorEmail = "Email is already use";
-        }
-        else {
+
+if (filter_has_var(INPUT_POST, "add")) {
+    if (!empty($Titre) && !empty($Vignette) && !empty($Abstract) && !empty($_FILES["Image"]["name"])
+            && !empty($Description) && !empty($Tags)) {
             /**
              * Attribue les champs au tableau à inserer dans la base de donnée
              * et les ajoute à la base de de donnée en affichant un message de réussite
              */
-            $auser = array();
-            $auser["FirstName"] = $FirstName;
-            $auser["LastName"] = $LastName;
-            $auser["Email"] = $Email;
-            $auser['Avatar'] = 'img/'.$_FILES["Avatar"]["name"];
-            $auser["BirthDate"] = $BirthDate;
-            $auser["Password"] = sha1($Password);
+            $aarticle = array();
+            $aarticle["Titre"] = $Titre;
+            $aarticle["Vignette"] = $Vignette;
+            $aarticle["Abstact"] = $Abstract;
+            $aarticle['Image'] = 'img/'.$_FILES["Avatar"]["name"];
+            $aarticle["Desription"] = $Description;
+            $aarticle["Tags"] = $Tags;
             addUser($auser);
             add_picture();
             header('Location: login.php');
@@ -53,7 +35,7 @@ if (filter_has_var(INPUT_POST, "register")) {
             $_SESSION['MessageType'] = "information";
             exit;
         }
-    } else {
+    else {
         $_SESSION['message'] = "Please filling all fields";
         $_SESSION['MessageType'] = "error";
     }
@@ -97,7 +79,7 @@ include './header.php';
                 $keywords = get_all_keywords();
                 foreach ($keywords as $keyword) {
                     ?>
-                            <input type="checkbox" name="q4_lausanne" /><?php echo $keyword['Keyword']; ?><br />
+                          <input type="radio" name="Tags" value="<?php echo $keyword['Keyword']; ?>"/><?php echo $keyword['Keyword']; ?><br />
                      <?php } ?>
                         </td>
               </tbody>

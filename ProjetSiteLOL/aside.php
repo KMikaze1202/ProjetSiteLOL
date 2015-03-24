@@ -1,56 +1,27 @@
 <aside id="ccr-right-section" class="col-md-4 ccr-home">
 			
 			<section id="sidebar-popular-post">
+                        <?php
+                           $PopularArticles = get_popular_5_articles_info();
+                        ?>
 				<div class="ccr-gallery-ttile">
 					<span></span> 
 					<p><strong>Popular Post</strong></p>
 				</div> <!-- .ccr-gallery-ttile -->
 				<ul>
+                                <?php
+                                    foreach ($PopularArticles as $PopularArticle) {
+                                ?>
 					<li>
 						<img src="img/sports-thumb-10.jpg" alt="Avatar">
-						<a href="#">This is the first popular post</a>
+						<a href=single.php?ArticleId=<?php echo $PopularArticle['ArticleId'] ?>"><?php echo $PopularArticle['Title']; ?></a>
 						<div class="date-like-comment">
-							<span class="date"><time datetime="2014-02-17">2014-02-17</time></span>
-							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
-							<a class="comments" href="#"><i class="fa fa-comments-o"></i> 49</a>
+							<span class="date"><time datetime="2014-02-17"><?php echo $PopularArticle['PublicationDate'] ?></time></span>
+							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i><?php echo $PopularArticle['Likes'] ?></a>
+                                                        <a class="comments" href="single.php?ArticleId=<?php echo $PopularArticle['ArticleId'] ?>#comments"><i class="fa fa-comments-o"></i><?php echo count_comments_by_article_id($PopularArticle['ArticleId']) ?></a>
 						</div>
 					</li>
-					<li>
-						<img src="img/thumbnail-small-7.jpg" alt="Avatar">
-						<a href="#">This is the first popular post</a>
-						<div class="date-like-comment">
-							<span class="date"><time datetime="2014-02-17">2014-02-17</time></span>
-							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
-							<a class="comments" href="#"><i class="fa fa-comments-o"></i> 49</a>
-						</div>
-					</li>
-					<li>
-						<img src="img/sports-thumb-5.jpg" alt="Avatar">
-						<a href="#">This is the first popular post</a>
-						<div class="date-like-comment">
-							<span class="date"><time datetime="2014-02-17">2014-02-17</time></span>
-							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
-							<a class="comments" href="#"><i class="fa fa-comments-o"></i> 49</a>
-						</div>
-					</li>
-					<li>
-						<img src="img/thumbnail-small-2.jpg" alt="Avatar">
-						<a href="#">This is the first popular post</a>
-						<div class="date-like-comment">
-							<span class="date"><time datetime="2014-02-17">2014-02-17</time></span>
-							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
-							<a class="comments" href="#"><i class="fa fa-comments-o"></i> 49</a>
-						</div>
-					</li>
-					<li>
-						<img src="img/thumbnail-small-5.jpg" alt="Avatar">
-						<a href="#">This is the first popular post</a>
-						<div class="date-like-comment">
-							<span class="date"><time datetime="2014-02-17">2014-02-17</time></span>
-							<a class="like" href="#"><i class="fa fa-thumbs-o-up"></i> 08</a>
-							<a class="comments" href="#"><i class="fa fa-comments-o"></i> 49</a>
-						</div>
-					</li>
+                                <?php } ?>
 				</ul>
 
 			</section> <!-- /#sidebar-popular-post -->

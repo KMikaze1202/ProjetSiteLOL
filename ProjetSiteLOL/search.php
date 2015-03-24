@@ -27,18 +27,18 @@ $Keyword = (string) $_GET['Keyword'];
                     <article>
 
                         <figure class="blog-thumbnails">
-                            <img src="<?php echo $article['Image']; ?>" alt="Article Image ">
+                            <a href=single.php?ArticleId=<?php echo $article['ArticleId'] ?>><img src="<?php echo $article['Image']; ?>" alt="Article Image "></a>
                         </figure> <!-- /.blog-thumbnails -->
                         <div class="blog-text">
-                            <h1><a href="single.html"><?php echo $article['Title']; ?></a></h1>
+                            <h1><a href=single.php?ArticleId=<?php echo $article['ArticleId'] ?>><?php echo $article['Title']; ?></a></h1>
                             <p>
                                 <?php echo $article['Abstract']; ?>
                             </p>
 
 
                             <div class="meta-data">			
-                                <a href="#" class="like"><i class="fa fa-thumbs-o-up"></i> 08</a>
-                                <a href="#" class="comments"><i class="fa fa-comments-o"></i> 49</a>			
+                                <a class="like"><i class="fa fa-thumbs-o-up"><?php echo $article['Likes'] ?></i></a>
+                                <a class="comments" href="single.php?ArticleId=<?php echo $article['ArticleId'] ?>#comments"><i class="fa fa-comments-o"></i><?php echo count_comments_by_article_id($article['ArticleId']) ?></a>			
                                 <span class="read-more"><a href="single.php?ArticleId=<?php echo $article['ArticleId'] ?>">Read More</a></span>
                             </div>
                         </div> <!-- /.blog-text -->
@@ -46,22 +46,11 @@ $Keyword = (string) $_GET['Keyword'];
                     </article>
                 <?php }
                 }  else {
-                    echo 'faux';    
+                    echo 'Aucuns articles ne contient le tag '.$Keyword;    
                 }
                 ?>
 
                 <div class="clearfix"></div>
-                <nav class="nav-paging">
-                    <ul>
-                        <li><a href="#pre"><i class="fa fa-chevron-left"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><span class="current">3</span></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#next"><i class="fa fa-chevron-right"></i></a></li>
-                    </ul>
-                </nav>
 
 
 
